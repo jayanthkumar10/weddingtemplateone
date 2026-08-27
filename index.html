@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ananya & Ajay - Wedding Invitation</title>
+    
+    <!-- Premium Fonts: Inter for UI, Clash Display for headings -->
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Intro Black Overlay -->
+    <div class="black-overlay">
+        <!-- Monogram or simple outline for loading state -->
+        <div class="loader-outline">A & A</div>
+    </div>
+
+    <!-- Top Banner (Hidden on load, slides down on scroll) -->
+    <div class="top-banner">
+        <span>JOIN US TO CELEBRATE OUR SPECIAL DAY</span>
+    </div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="nav-logo">A & A</div>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- The Page Content Wrapper (for Lenis) -->
+    <div class="smooth-wrapper">
+        <div class="smooth-content">
+            
+            <!-- Hero Section -->
+            <section class="hero-section" id="hero">
+                
+                <!-- The 9-Panel Mosaic Container -->
+                <div class="hero-mosaic" id="hero-mosaic">
+                    
+                    <!-- Panel 1: Tall Left -->
+                    <div class="mosaic-panel panel-1">
+                        <div class="panel-inner">
+                            <img src="Images/pexels-picturebymv-27455006.jpg" alt="Gallery Image 1">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 2: Wide Top -->
+                    <div class="mosaic-panel panel-2">
+                        <div class="panel-inner">
+                            <img src="Images/mosaic_wide.jpg" alt="Gallery Image 2">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 3: Tall Right -->
+                    <div class="mosaic-panel panel-3">
+                        <div class="panel-inner">
+                            <img src="Images/pexels-picturebymv-27455007.jpg" alt="Gallery Image 3">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 4: Tall Center-Left -->
+                    <div class="mosaic-panel panel-4">
+                        <div class="panel-inner">
+                            <img src="Images/pexels-picturebymv-27456654.jpg" alt="Gallery Image 4">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 5: Square Center-Right -->
+                    <div class="mosaic-panel panel-5">
+                        <div class="panel-inner">
+                            <img src="Images/panel_5.jpg" alt="Gallery Image 5">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 6: Square Bottom Left -->
+                    <div class="mosaic-panel panel-6">
+                        <div class="panel-inner">
+                            <img src="Images/pexels-picturebymv-27456656.jpg" alt="Gallery Image 6">
+                        </div>
+                    </div>
+                    
+                    <!-- Panel 7: Wide Bottom Right -->
+                    <div class="mosaic-panel panel-7">
+                        <div class="panel-inner">
+                            <img src="Images/pexels-picturebymv-27455008.jpg" alt="Gallery Image 7">
+                        </div>
+                    </div>
+                    
+                    <!-- Centerpiece Logo -->
+                    <div class="center-logo">
+                        <div class="glass-backing"></div>
+                        <div class="logo-foreground-text top-text">ANANYA</div>
+                        <div class="logo-background-text">&amp;</div>
+                        <div class="logo-foreground-text bottom-text">AJAY</div>
+                    </div>
+
+                </div>
+
+                <!-- Hero Footer Elements -->
+                <div class="hero-footer-elements">
+                    <div class="footer-left">
+                        <span class="sub-text">COMING</span>
+                        <span class="main-date">NOVEMBER 19, 2026</span>
+                    </div>
+                    
+                    <div class="footer-center">
+                        <button class="rsvp-btn">RSVP Now</button>
+                    </div>
+                    
+                    <div class="footer-right">
+                        <span>♥ You're Invited</span>
+                    </div>
+                </div>
+
+                <!-- Scroll Indicator -->
+                <div class="scroll-indicator">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                
+            </section>
+
+            <!-- Know the Couple Section -->
+            <section class="extended-look" id="couple-section">
+                <div class="couple-bg-wrapper">
+                    <img src="Images/mosaic_wide.jpg" alt="Ananya and Ajay" class="couple-bg-img">
+                    <div class="couple-overlay"></div>
+                </div>
+                
+                <div class="couple-dark-overlay"></div>
+                <div class="countdown-container">
+                    <h2 class="couple-heading">THE BIG DAY ARRIVES IN</h2>
+                    <div class="countdown-grid">
+                        <div class="time-box">
+                            <span class="time-number" id="days">00</span>
+                            <span class="time-label">DAYS</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time-number" id="hours">00</span>
+                            <span class="time-label">HOURS</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time-number" id="minutes">00</span>
+                            <span class="time-label">MINUTES</span>
+                        </div>
+                        <div class="time-box">
+                            <span class="time-number" id="seconds">00</span>
+                            <span class="time-label">SECONDS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Trailer Cards / Know the Couple Section -->
+            <section id="cards-section">
+                <div class="cards-container">
+                    <div class="cinematic-card bride-card">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-label">THE BRIDE</span>
+                            <h3 class="card-title">ANANYA</h3>
+                        </div>
+                    </div>
+                    <div class="cinematic-card groom-card">
+                        <div class="card-overlay"></div>
+                        <div class="card-content">
+                            <span class="card-label">THE GROOM</span>
+                            <h3 class="card-title">AJAY</h3>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events Pinned Background -->
+            <section id="events-bg-section">
+                <img src="Images/pexels-picturebymv-27456655.jpg" alt="Vintage Car Background" class="events-bg-img">
+                <div class="events-bg-overlay"></div>
+            </section>
+            
+            <!-- Events Scrolling Content -->
+            <section id="events-content-section">
+                <!-- Greeting -->
+                <div class="greeting-section">
+                    <h2 class="greeting-text">WE INVITE YOU<br>TO CELEBRATE OUR UNION</h2>
+                </div>
+                
+                <!-- Event Cards -->
+                <div class="event-card-container">
+                    
+                    <!-- Haldi Card -->
+                    <div class="event-wide-card haldi-card">
+                        <div class="event-image-side">
+                            <img src="Images/pexels-picturebymv-27456654.jpg" alt="Haldi Event">
+                        </div>
+                        <div class="event-info-side">
+                            <span class="event-tag">DAY 01</span>
+                            <h3 class="event-title">HALDI</h3>
+                            <p class="event-desc">Join us for a morning of vibrant colors, joyous laughter, and the auspicious start to our wedding festivities. Dress in your brightest yellows.</p>
+                            <a href="#" class="btn-event">RSVP for Haldi</a>
+                        </div>
+                    </div>
+
+                    <!-- Mehendi Card -->
+                    <div class="event-wide-card mehendi-card">
+                        <div class="event-image-side">
+                            <img src="Images/pexels-picturebymv-27456655.jpg" alt="Mehendi Event">
+                        </div>
+                        <div class="event-info-side">
+                            <span class="event-tag">DAY 01</span>
+                            <h3 class="event-title">MEHENDI</h3>
+                            <p class="event-desc">An evening of intricate henna designs, soulful music, and dancing under the stars. Bring your best moves.</p>
+                            <a href="#" class="btn-event">RSVP for Mehendi</a>
+                        </div>
+                    </div>
+
+                    <!-- Sangeeth Card -->
+                    <div class="event-wide-card sangeeth-card">
+                        <div class="event-image-side">
+                            <img src="Images/pexels-picturebymv-27456656.jpg" alt="Sangeeth Event">
+                        </div>
+                        <div class="event-info-side">
+                            <span class="event-tag">DAY 02</span>
+                            <h3 class="event-title">SANGEETH</h3>
+                            <p class="event-desc">The ultimate celebration of two families coming together. Expect epic performances, endless cocktails, and an unforgettable party.</p>
+                            <a href="#" class="btn-event">RSVP for Sangeeth</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

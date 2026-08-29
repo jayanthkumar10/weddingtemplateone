@@ -224,9 +224,9 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Adjust Panel 7 (Wide) to perfectly crop the Tall Couple Portrait */
+/* Adjust Panel 7 (Wide) to perfectly frame both the bride and groom */
 .panel-7 .panel-inner img {
-    object-position: center 40%;
+    object-position: center 15%;
 }
 
 .mosaic-panel:hover .panel-inner img {
@@ -793,14 +793,14 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 }
 
 .wd-split-image {
-    width: 100vw; /* Starts full width */
-    height: 100vh;
-    overflow: hidden;
     position: absolute;
     top: 0;
     left: 0;
+    width: 100vw;
+    height: 100vh;
     z-index: 25; /* Above content initially */
-    will-change: width;
+    will-change: clip-path;
+    clip-path: inset(0% 0% 0% 0%); /* Starts fully uncropped */
 }
 
 .wd-img-inner {
@@ -841,6 +841,9 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     margin-bottom: 4rem;
     /* For text unmasking */
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    /* For staggering up from bottom */
+    transform: translateY(100px); 
+    opacity: 0;
 }
 
 .wd-editorial-title .italic-serif {
@@ -849,9 +852,6 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     margin-top: 0.5rem;
     letter-spacing: 2px;
     color: var(--accent);
-    /* For staggering up from bottom */
-    transform: translateY(100px); 
-    opacity: 0;
 }
 
 .wd-info-block {
@@ -1081,6 +1081,16 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     font-weight: 600;
     letter-spacing: 4px;
     text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.finale-names .ampersand {
+    font-size: 5rem;
+    color: var(--accent);
+    font-weight: 400;
 }
 
 /* Glowing Glassmorphism Button */
@@ -1324,17 +1334,18 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
         display: block; /* Overrides the previous flex-direction logic just to be safe */
     }
     .wd-split-image {
-        top: auto;
-        bottom: 0; /* Align image container to bottom */
+        top: 0;
+        bottom: 0;
         width: 100vw;
-        height: 100vh; /* Start full height for the reveal */
-        will-change: height;
+        height: 100vh;
+        will-change: clip-path;
         transition: none;
+        clip-path: inset(0% 0% 0% 0%);
     }
     .wd-img-inner {
         position: absolute;
-        bottom: 0; /* Force the 100vh inner image to align its bottom with the mask */
-        top: auto;
+        top: 0;
+        bottom: 0; /* Align image full height */
     }
     .wd-split-content {
         top: 0; /* Align text to top */
@@ -1376,7 +1387,8 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 
     /* Grand Finale Mobile */
     .bg-monogram {
-        font-size: 80vw;
+        font-size: 100vw;
+        letter-spacing: -5vw;
     }
 
     .finale-quote {
@@ -1385,6 +1397,12 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 
     .finale-names {
         font-size: 3.5rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .finale-names .ampersand {
+        font-size: 2.5rem;
     }
 
     .btn-finale-rsvp {

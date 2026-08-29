@@ -375,11 +375,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         wdTimelineDesktop
-            .to('.wd-split-image', { width: "50vw", duration: 2, ease: "power3.inOut" })
+            // Use clipPath inset(top right bottom left) instead of width for hardware acceleration
+            // Image starts full screen, we cut off the right 50% to reveal text behind it
+            .to('.wd-split-image', { clipPath: "inset(0% 50% 0% 0%)", duration: 2, ease: "power3.inOut" })
             .to('.wd-img-inner', { scale: 1, duration: 2, ease: "power3.inOut" }, "<")
             // The Highlight Zoom: Slowly zoom into the Mandapam as the text reveals
             .to('.wd-img-inner img', { scale: 1.15, transformOrigin: "center center", duration: 3, ease: "none" }, "-=1.5")
-            .to('.wd-editorial-title .italic-serif', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
+            .to('.wd-editorial-title', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
             .to('.wd-line', { width: "100%", duration: 1.5, stagger: 0.2, ease: "power3.inOut" }, "-=2.2")
             .to(['.wd-info-label', '.wd-info-value'], { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=2");
     });
@@ -398,11 +400,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         wdTimelineMobile
-            .to('.wd-split-image', { height: "50vh", duration: 2, ease: "power3.inOut" })
+            // Use clipPath inset instead of height to prevent mobile layout thrashing glitches
+            // Image starts full screen, we cut off the top 50% to reveal text behind it
+            .to('.wd-split-image', { clipPath: "inset(50% 0% 0% 0%)", duration: 2, ease: "power3.inOut" })
             .to('.wd-img-inner', { scale: 1, duration: 2, ease: "power3.inOut" }, "<")
             // The Highlight Zoom: Slowly zoom into the stage/chairs
             .to('.wd-img-inner img', { scale: 1.15, transformOrigin: "center center", duration: 3, ease: "none" }, "-=1.5")
-            .to('.wd-editorial-title .italic-serif', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
+            .to('.wd-editorial-title', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
             .to('.wd-line', { width: "100%", duration: 1.5, stagger: 0.2, ease: "power3.inOut" }, "-=2.2")
             .to(['.wd-info-label', '.wd-info-value'], { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=2");
     });

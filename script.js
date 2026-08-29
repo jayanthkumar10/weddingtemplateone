@@ -534,3 +534,11 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
     }, 1000);
 });
+
+// Robust Fix for Intermittent Scroll Glitches:
+// Images loading asynchronously can change the document height AFTER DOMContentLoaded,
+// causing GSAP to calculate incorrect trigger points. We MUST refresh ScrollTrigger 
+// once the entire window (including all images) is fully loaded.
+window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
+});

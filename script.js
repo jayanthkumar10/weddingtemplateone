@@ -38,57 +38,79 @@ document.addEventListener("DOMContentLoaded", () => {
         delay: 1
     });
     
-    // Step 3: Fade out black overlay & simultaneously reveal hero
+    // Step 3: Slide up black overlay like a curtain & simultaneously reveal hero
     introTl.to('.black-overlay', {
-        opacity: 0,
+        yPercent: -100,
         duration: 1.5,
-        ease: 'power2.inOut',
+        ease: 'expo.inOut',
         onComplete: () => {
             document.querySelector('.black-overlay').style.display = 'none';
         }
     }, "+=0.2");
     
-    // Step 4: The simultaneous pop-in (starts exactly when overlay starts fading)
+    // Step 4: Quiet Luxury - Subtle Float
     introTl.fromTo('.mosaic-panel', 
-        { opacity: 0 }, 
-        { opacity: 1, duration: 1.5, stagger: 0, ease: 'power2.out' }, 
+        { y: 40, opacity: 0 }, 
+        { y: 0, opacity: 1, duration: 2.2, stagger: 0.1, ease: 'power3.out' }, 
+        "<0.2"
+    );
+
+    // Give images a subtle "breathing" scale down (ends at 1.1 to leave room for parallax)
+    introTl.fromTo('.mosaic-panel img', 
+        { scale: 1.15 }, 
+        { scale: 1.1, duration: 2.5, stagger: 0.1, ease: 'power2.out' }, 
         "<"
     );
     
+    // Glass backing smooth fade
     introTl.fromTo('.center-logo', 
-        { opacity: 0, scale: 1.5 }, 
-        { opacity: 1, scale: 1, duration: 1.5, ease: 'expo.out' }, 
-        "<"
+        { opacity: 0 }, 
+        { opacity: 1, duration: 2, ease: 'power2.out' }, 
+        "<0.2"
     );
     
-    introTl.fromTo('.hero-footer-elements', 
-        { opacity: 0, y: 30 }, 
-        { opacity: 1, y: 0, duration: 1.5, stagger: 0.1, ease: 'power3.out' }, 
-        "<0.5" // slightly delayed relative to the main pop
+    // Cinematic Film Fade for Text
+    introTl.fromTo('.center-logo .logo-foreground-text, .center-logo .logo-background-text',
+        { opacity: 0, y: 20, filter: 'blur(5px)' },
+        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 2, stagger: 0.2, ease: 'power3.out' },
+        "<0.3"
     );
 
     // 3. ScrollTrigger Mechanics
     
-    // Pullback / Scale down effect on the mosaic
+    // Pullback / Scale down effect on the mosaic container with clean opacity push
     gsap.to('#hero-mosaic', {
         scale: 0.85,
+        opacity: 0.4,
         ease: "none",
         scrollTrigger: {
             trigger: "#hero",
             start: "top top",
             end: "100vh top",
-            scrub: 1 // 1-second lag for buttery feel
+            scrub: 1
         }
     });
 
-    // Parallax background for countdown section
-    gsap.to('.extended-look', {
-        backgroundPosition: `50% ${-window.innerHeight * 0.3}px`,
+    // Inner Parallax: shift images inside panels at a different rate
+    gsap.to('.mosaic-panel img', {
+        yPercent: 4.9, // Keeps translation safely inside the 5% buffer provided by scale: 1.1
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#hero",
+            start: "top top",
+            end: "100vh top",
+            scrub: 1
+        }
+    });
+
+    // Cinematic Dissolve: Fade in the rich background image as it scrolls up
+    gsap.to('.couple-bg-wrapper', {
+        opacity: 1,
         ease: "none",
         scrollTrigger: {
             trigger: '.extended-look',
-            start: 'top bottom',
-            end: 'top top', // Stops moving exactly when it pins
+            start: 'top bottom', // Starts fading when section enters viewport
+            end: 'top center',   // Fully visible by the time it reaches center
             scrub: true
         }
     });
@@ -105,10 +127,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 1. Fade the background overlay to solid dark as the user scrolls
-    // It stays transparent for the first 40% of the scroll, then fades to black
-    cardsTl.to('.couple-dark-overlay', { opacity: 0, duration: 0.4 })
-           .to('.couple-dark-overlay', { opacity: 1, duration: 0.6, ease: 'none' });
+    // 1. (Cards timeline simply pins the countdown section)
+    // The background fade is now handled by a separate ScrollTrigger tied perfectly to the cards entering.
 
     // Top Banner slide down (from translateY(-100%) to 0)
     gsap.to('.top-banner', {
@@ -123,8 +143,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
     
-    // Fade out footer elements on scroll
-    gsap.to('.hero-footer-elements, .scroll-indicator', {
+    // Fade out scroll indicator on scroll
+    gsap.to('.scroll-indicator', {
         opacity: 0,
         y: -20,
         ease: "none",
@@ -136,8 +156,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 4. "Know the Couple" Section Animations
+    // 4. "Know the Couple" Section & Cards Animations
     
+    // Elite Full-Screen Dissolve: Tied exactly to the cards section entering the screen
+    gsap.to('.couple-dark-overlay', {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+            trigger: "#cards-section",
+            start: "top bottom", // Starts fading exactly as cards enter the bottom of the screen
+            end: "center center", // Fully dark when cards are in the middle
+            scrub: true
+        }
+    });
+
+    // Elite Cinematic Cards Entrance - Cards slide up
+    gsap.to('.cinematic-card', {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2, // Bride card rises first, then Groom card
+        ease: "power4.out",
+        scrollTrigger: {
+            trigger: "#cards-section",
+            start: "top 60%", // Cards fly up just as the background blur intensifies
+            toggleActions: "play none none reverse"
+        }
+    });
+
+    // Reveal texts inside cinematic cards
+    gsap.fromTo('.cinematic-card .card-label, .cinematic-card .card-title, .cinematic-card .card-parents',
+        { y: '100%' },
+        {
+            y: '0%',
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power4.out",
+            scrollTrigger: {
+                trigger: "#cards-section",
+                start: "top 55%",
+                toggleActions: "play none none reverse"
+            }
+        }
+    );
     // Background fade and parallax (scrubbed)
     gsap.to('.couple-bg-wrapper', {
         opacity: 1,
@@ -167,6 +228,71 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 5. Events Section (Haldi, Mehendi, Sangeeth) Animations
 
+    // Lens Blur Crossfade Transition (Cards -> Greeting)
+    const crossfadeMm = gsap.matchMedia();
+
+    // Desktop (Blur + Fade)
+    crossfadeMm.add("(min-width: 769px)", () => {
+        gsap.to('.cards-container', {
+            filter: "blur(24px)",
+            opacity: 0,
+            y: -100,
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#events-bg-section",
+                start: "top 90%",
+                end: "top 10%",
+                scrub: true
+            }
+        });
+
+        gsap.fromTo('.greeting-text', 
+            { opacity: 0, filter: "blur(24px)", y: 100 },
+            {
+                opacity: 1, 
+                filter: "blur(0px)", 
+                y: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".greeting-section",
+                    start: "top 80%",
+                    end: "center center",
+                    scrub: true
+                }
+            }
+        );
+    });
+
+    // Mobile (Clean Fade Only - Highly optimized for performance)
+    crossfadeMm.add("(max-width: 768px)", () => {
+        gsap.to('.cards-container', {
+            opacity: 0,
+            y: -50, // Reduced drift for mobile
+            ease: "none",
+            scrollTrigger: {
+                trigger: "#events-bg-section",
+                start: "top 90%",
+                end: "top 10%",
+                scrub: true
+            }
+        });
+
+        gsap.fromTo('.greeting-text', 
+            { opacity: 0, y: 50 },
+            {
+                opacity: 1, 
+                y: 0,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: ".greeting-section",
+                    start: "top 80%",
+                    end: "center center",
+                    scrub: true
+                }
+            }
+        );
+    });
+
     // Pin the events background section while the content scrolls over it
     ScrollTrigger.create({
         trigger: "#events-bg-section",
@@ -177,35 +303,206 @@ document.addEventListener("DOMContentLoaded", () => {
         pinSpacing: false // CRUCIAL: lets the next section (content) scroll natively over the pinned background
     });
 
-    // Greeting Text Animation (Fade up)
-    gsap.from('.greeting-text', {
-        scrollTrigger: {
-            trigger: '.greeting-section',
-            start: "top 60%",
-            toggleActions: "play none none reverse"
-        },
-        y: 80,
-        opacity: 0,
-        duration: 1.5,
-        ease: "power4.out"
-    });
-
-    // Event Cards Sequential Reveal
+    // Event Cards Sequential Reveal & Internal Parallax
     gsap.utils.toArray('.event-wide-card').forEach(card => {
+        // Card Reveal
         gsap.from(card, {
             scrollTrigger: {
                 trigger: card,
-                start: "top 85%", // Triggers slightly before it enters the viewport
+                start: "top 90%", // Triggers earlier for smoother pacing
                 toggleActions: "play none none reverse"
             },
-            y: 120,
+            y: 100,
             opacity: 0,
-            duration: 1.2,
-            ease: "power3.out"
+            duration: 1.5,
+            ease: "power4.out"
+        });
+
+        // Internal Image Parallax
+        const img = card.querySelector('.event-image-side img');
+        if (img) {
+            // Ensure the image is scaled via CSS or JS so parallax doesn't show edges
+            gsap.set(img, { scale: 1.2 });
+            gsap.fromTo(img, 
+                { yPercent: -15 },
+                {
+                    yPercent: 15,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: true
+                    }
+                }
+            );
+        }
+    });
+
+    // 6. The Wedding Day Section (Responsive Cinematic Shrink-Reveal)
+    let mm = gsap.matchMedia();
+
+    // Desktop Animation (Horizontal Shrink)
+    mm.add("(min-width: 769px)", () => {
+        // The Cinematic Expansion Reveal Entrance (Desktop Only)
+        gsap.fromTo('#wedding-day-split', 
+            { 
+                clipPath: "inset(10% 5% 0 5%)", 
+                borderRadius: "40px" 
+            },
+            {
+                clipPath: "inset(0% 0% 0% 0%)",
+                borderRadius: "0px",
+                ease: "none",
+                scrollTrigger: {
+                    trigger: '#wedding-day-split',
+                    start: "top bottom", 
+                    end: "top top",      
+                    scrub: true
+                }
+            }
+        );
+
+        const wdTimelineDesktop = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#wedding-day-split",
+                start: "top top",
+                end: "+=200%",
+                pin: true,
+                scrub: 1,
+                pinSpacing: true
+            }
+        });
+
+        wdTimelineDesktop
+            .to('.wd-split-image', { width: "50vw", duration: 2, ease: "power3.inOut" })
+            .to('.wd-img-inner', { scale: 1, duration: 2, ease: "power3.inOut" }, "<")
+            // The Highlight Zoom: Slowly zoom into the Mandapam as the text reveals
+            .to('.wd-img-inner img', { scale: 1.15, transformOrigin: "center center", duration: 3, ease: "none" }, "-=1.5")
+            .to('.wd-editorial-title .italic-serif', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
+            .to('.wd-line', { width: "100%", duration: 1.5, stagger: 0.2, ease: "power3.inOut" }, "-=2.2")
+            .to(['.wd-info-label', '.wd-info-value'], { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=2");
+    });
+
+    // Mobile Animation (Vertical Shrink)
+    mm.add("(max-width: 768px)", () => {
+        const wdTimelineMobile = gsap.timeline({
+            scrollTrigger: {
+                trigger: "#wedding-day-split",
+                start: "top top",
+                end: "+=150%", // Slightly shorter pin on mobile
+                pin: true,
+                scrub: 1,
+                pinSpacing: true
+            }
+        });
+
+        wdTimelineMobile
+            .to('.wd-split-image', { height: "50vh", duration: 2, ease: "power3.inOut" })
+            .to('.wd-img-inner', { scale: 1, duration: 2, ease: "power3.inOut" }, "<")
+            // The Highlight Zoom: Slowly zoom into the stage/chairs
+            .to('.wd-img-inner img', { scale: 1.15, transformOrigin: "center center", duration: 3, ease: "none" }, "-=1.5")
+            .to('.wd-editorial-title .italic-serif', { y: 0, opacity: 1, duration: 1, ease: "power4.out" }, "-=2.5")
+            .to('.wd-line', { width: "100%", duration: 1.5, stagger: 0.2, ease: "power3.inOut" }, "-=2.2")
+            .to(['.wd-info-label', '.wd-info-value'], { y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power4.out" }, "-=2");
+    });
+
+    // 6.5 Location & Route Navigator Animations
+
+    // 6.5 Synchronized Wedding Day to Location Transition
+    // By placing both animations on the same scrubbed timeline, we guarantee 
+    // they never desync regardless of scroll speed or direction (fixes backwards scroll bugs).
+    const locTransition = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#location-section",
+            start: "top 90%", // Start transition as Location section enters viewport
+            end: "top 30%",   // End transition as it settles into place
+            scrub: true
+        }
+    });
+
+    locTransition
+        // 1. Dissolve the Wedding Day content smoothly without heavy blur
+        .to(['.wd-split-image', '.wd-split-content'], { 
+            opacity: 0, 
+            ease: "none" 
+        }, 0) // Starts at time 0
+        // 2. Reveal the Location Card
+        .fromTo('.location-card', 
+            { y: 150, opacity: 0 }, 
+            { y: 0, opacity: 1, ease: "none" }, 
+            0 // Starts at time 0 (perfectly synchronized)
+        );
+
+    // 8. Grand Finale Footer Animation (The Curtain Reveal)
+    // This perfectly triggers as the bottom of the location section scrolls up, revealing the fixed footer behind the gap!
+    const finaleTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: "#location-section",
+            start: "bottom bottom", // Starts exactly when the 100vh margin gap begins to reveal
+            end: "bottom top",      // Ends when the Location section has completely slid off screen
+            scrub: true
+        }
+    });
+
+    finaleTimeline
+        // The monogram slowly scales up and emerges from the void
+        .fromTo('.bg-monogram', { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 0.05, duration: 1 })
+        // The text gently floats up
+        .fromTo('.finale-text-wrapper', { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8 }, "-=0.8")
+        // The button glows into existence
+        .fromTo('.btn-finale-rsvp', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: "back.out(1.5)" }, "-=0.5")
+        // The copyright fades in last
+        .fromTo('.finale-copyright', { opacity: 0 }, { opacity: 1, duration: 0.5 }, "-=0.2");
+
+    // 9. Hamburger Menu Logic
+    const hamburger = document.querySelector('.hamburger');
+    const menuOverlay = document.querySelector('.mobile-menu-overlay');
+    const menuLinks = document.querySelectorAll('.menu-links a');
+    
+    let isMenuOpen = false;
+    const menuTl = gsap.timeline({ paused: true });
+
+    menuTl.to(menuOverlay, {
+        autoAlpha: 1, // Toggles visibility and opacity
+        duration: 0.4,
+        ease: 'power2.out'
+    })
+    .to(menuLinks, {
+        y: '0%',
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'expo.out'
+    }, "-=0.2");
+
+    hamburger.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        hamburger.classList.toggle('active');
+        
+        if (isMenuOpen) {
+            menuOverlay.style.pointerEvents = 'auto';
+            lenis.stop(); // Lock scroll
+            menuTl.timeScale(1).play();
+        } else {
+            menuOverlay.style.pointerEvents = 'none';
+            lenis.start(); // Unlock scroll
+            menuTl.timeScale(1.5).reverse();
+        }
+    });
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if(isMenuOpen) {
+                isMenuOpen = false;
+                hamburger.classList.remove('active');
+                menuOverlay.style.pointerEvents = 'none';
+                lenis.start();
+                menuTl.timeScale(1.5).reverse();
+            }
         });
     });
 
-    // 6. Countdown Timer Logic
+    // 7. Countdown Timer Logic
     const countdownDate = new Date("November 19, 2026 00:00:00").getTime();
 
     const updateCountdown = setInterval(function() {

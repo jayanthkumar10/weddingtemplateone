@@ -49,7 +49,7 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: #000;
+    background-color: var(--bg-dark);
     z-index: 9999;
     display: flex;
     justify-content: center;
@@ -70,7 +70,7 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -88,7 +88,7 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     top: 0;
     left: 0;
     width: 100%;
-    height: 80px;
+    height: 60px;
     padding: 0 4rem;
     display: flex;
     justify-content: space-between;
@@ -115,7 +115,65 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     width: 30px;
     height: 2px;
     background-color: var(--text-main);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ----------------- Mobile Menu Overlay ----------------- */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #140a0b;
+    z-index: 99; /* Just below the navbar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none; /* Disabled until active */
+    visibility: hidden;
+}
+
+.menu-links {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-links li {
+    overflow: hidden;
+    margin-bottom: 2.5rem;
+}
+
+.menu-links a {
+    display: block;
+    font-family: 'Clash Display', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 500;
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    transform: translateY(100%); /* Initial GSAP state */
+    transition: color 0.3s ease;
+}
+
+.menu-links a:hover {
+    color: var(--accent);
 }
 
 /* ----------------- Hero Section ----------------- */
@@ -147,9 +205,8 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 
 .mosaic-panel {
     position: relative;
-    background-color: #1a1a2e;
+    background-color: transparent;
     overflow: hidden;
-    opacity: 0; /* Initial state for GSAP */
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
@@ -241,11 +298,29 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 }
 
 .top-text {
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
 }
 
 .bottom-text {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
+}
+
+.reveal-wrapper {
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    margin: -0.5rem 0; /* Negate the padding so layout doesn't break */
+}
+
+.parents-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
 }
 
 /* ----------------- Footer Elements ----------------- */
@@ -328,11 +403,12 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #000;
+    background-color: #140a0b;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .couple-bg-wrapper {
@@ -368,19 +444,27 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     position: relative;
     z-index: 2;
     text-align: center;
-    margin-top: 15vh;
     width: 100%;
 }
 
 .couple-heading {
     font-size: 3.5rem;
     font-weight: 500;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     color: #ffffff;
     text-shadow: 0 4px 15px rgba(0,0,0,0.8);
     margin-bottom: 4rem;
     opacity: 0; /* GSAP stagger */
     transform: translateY(30px);
+}
+
+.italic-serif {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: none;
+    color: inherit; /* Ensures it perfectly matches the parent heading for max visibility */
 }
 
 .countdown-grid {
@@ -396,11 +480,11 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.01));
-    backdrop-filter: blur(16px) saturate(120%);
-    -webkit-backdrop-filter: blur(16px) saturate(120%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background: rgba(20, 10, 11, 0.45);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     border-radius: 20px;
     padding: 2rem 1rem;
     opacity: 0; /* GSAP stagger */
@@ -421,8 +505,8 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     font-family: 'Inter', sans-serif;
     font-size: 0.9rem;
     font-weight: 500;
-    letter-spacing: 4px;
-    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 6px;
+    color: #ffffff;
     text-transform: uppercase;
 }
 
@@ -436,6 +520,8 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     background-color: #140a0b;
     z-index: 5;
     opacity: 0; /* Changed by GSAP */
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
     pointer-events: none;
 }
 
@@ -463,32 +549,42 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     height: 75vh;
     border-radius: 20px;
     overflow: hidden;
-    background-size: cover;
-    background-position: center;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    opacity: 0; /* Hidden initially for GSAP reveal */
+    transform: translateY(100px);
+    cursor: pointer;
 }
 
-.bride-card {
-    background-image: url('Images/pexels-picturebymv-27455006.jpg');
+.card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), filter 1.2s ease;
+    z-index: 0;
 }
 
-.groom-card {
-    background-image: url('Images/pexels-picturebymv-27455007.jpg');
+.cinematic-card:hover .card-bg {
+    transform: scale(1.05);
+    filter: brightness(1.1);
 }
 
 .card-overlay {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 60%;
-    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+    height: 80%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%);
     z-index: 1;
 }
 
 .card-content {
     position: absolute;
-    bottom: 3rem;
+    bottom: 2.5rem;
     width: 100%;
     text-align: center;
     z-index: 2;
@@ -511,8 +607,18 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     font-weight: 600;
     letter-spacing: 8px;
     color: #ffffff;
-    margin: 0;
+    margin: 0 0 0.5rem 0;
     text-shadow: 0 4px 15px rgba(0,0,0,0.8);
+}
+
+.card-parents {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    display: block;
 }
 
 /* ----------------- Events Section (Haldi, Mehendi, Sangeeth) ----------------- */
@@ -520,17 +626,9 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     position: relative;
     width: 100vw;
     height: 100vh;
+    background-color: var(--bg-dark); /* Solid luxury color instead of noisy image */
     overflow: hidden;
     z-index: 1;
-}
-
-.events-bg-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    transform: scale(1.1); /* For subtle parallax */
-    will-change: transform;
 }
 
 .events-bg-overlay {
@@ -539,24 +637,28 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(20, 10, 11, 0.5); /* Dark maroon overlay */
+    /* Adds a subtle radial vignette for depth */
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%);
 }
 
 #events-content-section {
     position: relative;
     z-index: 10;
     background: transparent; /* CRITICAL: let the pinned bg show through */
+    margin-top: -100vh; /* CRITICAL FIX: Pulls the content up to exactly overlap the background, eliminating the dead scroll gap */
     padding-bottom: 20vh;
 }
 
 .greeting-section {
     width: 100vw;
-    min-height: 100vh;
+    padding-top: 15vh;
+    padding-bottom: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0 5vw;
+    padding-left: 5vw;
+    padding-right: 5vw;
 }
 
 .greeting-text {
@@ -575,11 +677,11 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15vh; /* Massive spacing between events */
+    gap: 10vh; /* Reduced spacing between events for better flow */
     width: 100%;
 }
 
-.event-wide-card {
+.event-wide-card, .location-card {
     display: flex;
     width: 85vw;
     height: 70vh;
@@ -678,6 +780,120 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
     color: #000000;
 }
 
+/* ----------------- Wedding Day Section (Editorial Split) ----------------- */
+#wedding-day-split {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    overflow: hidden;
+    position: relative;
+    z-index: 20;
+    will-change: clip-path, border-radius;
+}
+
+.wd-split-image {
+    width: 100vw; /* Starts full width */
+    height: 100vh;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 25; /* Above content initially */
+    will-change: width;
+}
+
+.wd-img-inner {
+    width: 100vw; /* Force inner image wrapper to maintain 100vw so image doesn't squash when wrapper shrinks */
+    height: 100vh;
+    /* Start slightly scaled up for GSAP parallax out */
+    transform: scale(1.2); 
+}
+
+.wd-img-inner img {
+    width: 100vw; /* Keeps image full width regardless of parent crop */
+    height: 100vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+.wd-split-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5vw;
+    z-index: 20; /* Underneath the image initially */
+}
+
+.wd-editorial-title {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: 12px;
+    color: #ffffff;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin-bottom: 4rem;
+    /* For text unmasking */
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.wd-editorial-title .italic-serif {
+    display: block;
+    font-size: 6rem;
+    margin-top: 0.5rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    /* For staggering up from bottom */
+    transform: translateY(100px); 
+    opacity: 0;
+}
+
+.wd-info-block {
+    width: 100%;
+    max-width: 500px;
+}
+
+.wd-line {
+    width: 0%; /* Will draw to 100% */
+    height: 1px;
+    background-color: var(--accent);
+    opacity: 0.5;
+}
+
+.wd-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    /* Masking setup for child elements */
+    overflow: hidden; 
+}
+
+.wd-info-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+.wd-info-value {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    color: #ffffff;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
 /* ----------------- Media Queries (Responsiveness) ----------------- */
 
 /* TABLET (max-width: 1024px) */
@@ -713,6 +929,196 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
         font-size: 3rem;
         letter-spacing: 8px;
     }
+}
+
+/* ----------------- Location & Route Navigator ----------------- */
+#location-section {
+    position: relative;
+    width: 100vw;
+    height: 100vh; /* Default desktop height */
+    background-color: transparent; /* Must be transparent for crossfade */
+    z-index: 30; /* Higher than Wedding Day (z-index 20) */
+    margin-top: -15vh; /* Overlap with Wedding Day to close any gaps */
+    margin-bottom: 100vh; /* Creates the gap to reveal the fixed footer behind it! */
+}
+
+/* The Container to center the Location Card */
+.location-card-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10vh 5vw;
+}
+
+/* Map specific tweaks inside the image side */
+.location-card .event-image-side {
+    position: relative;
+}
+
+.location-logistics {
+    display: flex;
+    justify-content: flex-start;
+    gap: 4rem;
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.logistics-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.logistics-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+}
+
+.logistics-value {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+.map-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    /* Inverts to dark mode, then hue rotates 180 to restore pin colors */
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(100%);
+    pointer-events: none; /* Prevent scroll trapping on mobile */
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Subtle inner shadow overlay to integrate map smoothly */
+    background: radial-gradient(circle at center, transparent 30%, rgba(20, 10, 11, 0.8) 100%);
+    pointer-events: none;
+}
+
+/* Let the location info side take more space */
+.location-info-side {
+    flex: 1.5; /* Slightly wider than event-info-side */
+    justify-content: center;
+}
+
+.location-logistics {
+    display: flex;
+    gap: 2rem;
+}
+
+/* ----------------- Grand Finale Footer ----------------- */
+#finale-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -10; /* Locked behind the entire webpage canvas */
+    background-color: var(--bg-dark); /* Deep void */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    color: #ffffff;
+}
+
+.finale-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Massive Monogram Texture */
+.bg-monogram {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Clash Display', sans-serif;
+    font-size: 40vw;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    opacity: 0.02; /* Extremely subtle luxury watermark */
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.finale-text-wrapper {
+    margin-bottom: 3rem;
+    z-index: 2;
+}
+
+.finale-quote {
+    font-family: 'Newsreader', serif;
+    font-style: italic;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.finale-names {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 6rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* Glowing Glassmorphism Button */
+.btn-finale-rsvp {
+    display: inline-block;
+    padding: 1.2rem 4rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    color: #ffffff;
+    text-transform: uppercase;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    z-index: 2;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.btn-finale-rsvp:hover {
+    background: #ffffff;
+    color: #000000;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+.finale-copyright {
+    position: absolute;
+    bottom: 2rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
 }
 
 /* MOBILE (max-width: 768px) */
@@ -801,25 +1207,36 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
         display: none; /* Hide on mobile to save space */
     }
 
+    .menu-links a {
+        font-size: 2.2rem; /* Reduced from 3.5rem for mobile */
+    }
+
+    .menu-links li {
+        margin-bottom: 1.5rem;
+    }
+
     .couple-heading {
         font-size: 2.2rem;
         letter-spacing: 4px;
     }
 
     .countdown-container {
-        margin-top: 10vh;
+        /* Removed margin-top to allow flex center alignment */
     }
 
     .couple-heading {
         font-size: 1.4rem;
         letter-spacing: 4px;
+        text-indent: 4px; /* Counteracts letter-spacing to perfectly center */
         margin-bottom: 2rem;
     }
 
     .countdown-grid {
         display: flex;
+        justify-content: center;
         gap: 0.5rem;
-        width: 95vw;
+        width: 100%;
+        padding: 0 1rem;
     }
     
     .time-box {
@@ -862,7 +1279,7 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
         letter-spacing: 2px;
     }
 
-    .event-wide-card {
+    .event-wide-card, .location-card {
         flex-direction: column;
         width: 95vw;
         height: auto;
@@ -900,6 +1317,79 @@ h1, h2, h3, .logo-text, .main-date, .rsvp-btn, .top-banner {
 
     .btn-event {
         align-self: center;
+    }
+
+    /* Wedding Day Split Mobile */
+    #wedding-day-split {
+        display: block; /* Overrides the previous flex-direction logic just to be safe */
+    }
+    .wd-split-image {
+        top: auto;
+        bottom: 0; /* Align image container to bottom */
+        width: 100vw;
+        height: 100vh; /* Start full height for the reveal */
+        will-change: height;
+        transition: none;
+    }
+    .wd-img-inner {
+        position: absolute;
+        bottom: 0; /* Force the 100vh inner image to align its bottom with the mask */
+        top: auto;
+    }
+    .wd-split-content {
+        top: 0; /* Align text to top */
+        bottom: auto;
+        width: 100vw;
+        height: 50vh;
+        padding: 60px 5vw 10px 5vw; /* Reduced padding to ensure fit */
+        justify-content: center; /* Center the text securely in the top 50vh */
+        z-index: 30; /* Ensure text stays ON TOP of the image if it overflows */
+    }
+    .wd-editorial-title {
+        font-size: 1rem;
+        margin-bottom: 1rem; /* Reduced to fit mobile height */
+    }
+    .wd-editorial-title .italic-serif {
+        font-size: 2.5rem; /* Drastically reduced from 4rem so it doesn't overflow */
+    }
+    .wd-info-row {
+        padding: 0.8rem 0; /* Reduced padding */
+    }
+    .wd-info-label {
+        font-size: 0.65rem;
+    }
+    .wd-info-value {
+        font-size: 1rem;
+    }
+
+    /* Location Section Mobile */
+    #location-section {
+        height: auto;
+        min-height: 100vh;
+        overflow: visible;
+    }
+
+    .location-card-container {
+        padding: 5vh 5vw;
+        height: auto;
+    }
+
+    /* Grand Finale Mobile */
+    .bg-monogram {
+        font-size: 80vw;
+    }
+
+    .finale-quote {
+        font-size: 1.5rem;
+    }
+
+    .finale-names {
+        font-size: 3.5rem;
+    }
+
+    .btn-finale-rsvp {
+        padding: 1rem 3rem;
+        font-size: 0.85rem;
     }
 }
 

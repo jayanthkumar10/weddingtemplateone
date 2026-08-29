@@ -36,6 +36,16 @@
         </div>
     </nav>
 
+    <!-- Full Screen Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay">
+        <ul class="menu-links">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#couple-section">The Couple</a></li>
+            <li><a href="#events-section">Events</a></li>
+            <li><a href="#rsvp">RSVP</a></li>
+        </ul>
+    </div>
+
     <!-- The Page Content Wrapper (for Lenis) -->
     <div class="smooth-wrapper">
         <div class="smooth-content">
@@ -63,7 +73,7 @@
                     <!-- Panel 3: Tall Right -->
                     <div class="mosaic-panel panel-3">
                         <div class="panel-inner">
-                            <img src="Images/pexels-picturebymv-27455007.jpg" alt="Gallery Image 3">
+                            <img src="Images/new_groom_portrait.jpg" alt="Gallery Image 3">
                         </div>
                     </div>
                     
@@ -98,28 +108,22 @@
                     <!-- Centerpiece Logo -->
                     <div class="center-logo">
                         <div class="glass-backing"></div>
-                        <div class="logo-foreground-text top-text">ANANYA</div>
-                        <div class="logo-background-text">&amp;</div>
-                        <div class="logo-foreground-text bottom-text">AJAY</div>
+                        
+                        <div class="reveal-wrapper">
+                            <div class="logo-foreground-text top-text">ANANYA</div>
+                        </div>
+                        
+                        <div class="reveal-wrapper">
+                            <div class="logo-background-text">&amp;</div>
+                        </div>
+                        
+                        <div class="reveal-wrapper">
+                            <div class="logo-foreground-text bottom-text">AJAY</div>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- Hero Footer Elements -->
-                <div class="hero-footer-elements">
-                    <div class="footer-left">
-                        <span class="sub-text">COMING</span>
-                        <span class="main-date">NOVEMBER 19, 2026</span>
-                    </div>
-                    
-                    <div class="footer-center">
-                        <button class="rsvp-btn">RSVP Now</button>
-                    </div>
-                    
-                    <div class="footer-right">
-                        <span>♥ You're Invited</span>
-                    </div>
-                </div>
 
                 <!-- Scroll Indicator -->
                 <div class="scroll-indicator">
@@ -137,7 +141,7 @@
                 
                 <div class="couple-dark-overlay"></div>
                 <div class="countdown-container">
-                    <h2 class="couple-heading">THE BIG DAY ARRIVES IN</h2>
+                    <h2 class="couple-heading">THE BIG DAY <span class="italic-serif">Arrives In</span></h2>
                     <div class="countdown-grid">
                         <div class="time-box">
                             <span class="time-number" id="days">00</span>
@@ -163,25 +167,28 @@
             <section id="cards-section">
                 <div class="cards-container">
                     <div class="cinematic-card bride-card">
+                        <div class="card-bg" style="background-image: url('Images/pexels-picturebymv-27455006.jpg');"></div>
                         <div class="card-overlay"></div>
                         <div class="card-content">
-                            <span class="card-label">THE BRIDE</span>
-                            <h3 class="card-title">ANANYA</h3>
+                            <div class="reveal-wrapper"><span class="card-label">THE BRIDE</span></div>
+                            <div class="reveal-wrapper"><h3 class="card-title">ANANYA</h3></div>
+                            <div class="reveal-wrapper"><span class="card-parents">Daughter of Sanjay & Meena</span></div>
                         </div>
                     </div>
                     <div class="cinematic-card groom-card">
+                        <div class="card-bg" style="background-image: url('Images/new_groom_portrait.jpg');"></div>
                         <div class="card-overlay"></div>
                         <div class="card-content">
-                            <span class="card-label">THE GROOM</span>
-                            <h3 class="card-title">AJAY</h3>
+                            <div class="reveal-wrapper"><span class="card-label">THE GROOM</span></div>
+                            <div class="reveal-wrapper"><h3 class="card-title">AJAY</h3></div>
+                            <div class="reveal-wrapper"><span class="card-parents">Son of Rajesh & Priya</span></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Events Pinned Background -->
+            <!-- Events Pinned Background (Solid Color for Premium Feel) -->
             <section id="events-bg-section">
-                <img src="Images/pexels-picturebymv-27456655.jpg" alt="Vintage Car Background" class="events-bg-img">
                 <div class="events-bg-overlay"></div>
             </section>
             
@@ -189,7 +196,7 @@
             <section id="events-content-section">
                 <!-- Greeting -->
                 <div class="greeting-section">
-                    <h2 class="greeting-text">WE INVITE YOU<br>TO CELEBRATE OUR UNION</h2>
+                    <h2 class="greeting-text"><span class="italic-serif" style="font-size: 0.9em; text-transform: capitalize; letter-spacing: 2px;">We Invite You</span><br>TO CELEBRATE OUR UNION</h2>
                 </div>
                 
                 <!-- Event Cards -->
@@ -198,46 +205,141 @@
                     <!-- Haldi Card -->
                     <div class="event-wide-card haldi-card">
                         <div class="event-image-side">
-                            <img src="Images/pexels-picturebymv-27456654.jpg" alt="Haldi Event">
+                            <img src="Images/haldi.jpg" alt="Haldi Event">
                         </div>
                         <div class="event-info-side">
-                            <span class="event-tag">DAY 01</span>
+                            <span class="event-tag">NOV 17, 2026</span>
                             <h3 class="event-title">HALDI</h3>
                             <p class="event-desc">Join us for a morning of vibrant colors, joyous laughter, and the auspicious start to our wedding festivities. Dress in your brightest yellows.</p>
-                            <a href="#" class="btn-event">RSVP for Haldi</a>
+                            <a href="#location-section" class="btn-event">View Location</a>
                         </div>
                     </div>
 
                     <!-- Mehendi Card -->
                     <div class="event-wide-card mehendi-card">
                         <div class="event-image-side">
-                            <img src="Images/pexels-picturebymv-27456655.jpg" alt="Mehendi Event">
+                            <img src="Images/mehendi.jpg" alt="Mehendi Event">
                         </div>
                         <div class="event-info-side">
-                            <span class="event-tag">DAY 01</span>
+                            <span class="event-tag">NOV 17, 2026</span>
                             <h3 class="event-title">MEHENDI</h3>
                             <p class="event-desc">An evening of intricate henna designs, soulful music, and dancing under the stars. Bring your best moves.</p>
-                            <a href="#" class="btn-event">RSVP for Mehendi</a>
+                            <a href="#location-section" class="btn-event">View Location</a>
                         </div>
                     </div>
 
                     <!-- Sangeeth Card -->
                     <div class="event-wide-card sangeeth-card">
                         <div class="event-image-side">
-                            <img src="Images/pexels-picturebymv-27456656.jpg" alt="Sangeeth Event">
+                            <img src="Images/sangeeth.jpg" alt="Sangeeth Event">
                         </div>
                         <div class="event-info-side">
-                            <span class="event-tag">DAY 02</span>
+                            <span class="event-tag">NOV 18, 2026</span>
                             <h3 class="event-title">SANGEETH</h3>
                             <p class="event-desc">The ultimate celebration of two families coming together. Expect epic performances, endless cocktails, and an unforgettable party.</p>
-                            <a href="#" class="btn-event">RSVP for Sangeeth</a>
+                            <a href="#location-section" class="btn-event">View Location</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- The Wedding Day Section (Editorial Split) -->
+            <section id="wedding-day-split">
+                <!-- Left: The Visual -->
+                <div class="wd-split-image">
+                    <div class="wd-img-inner">
+                        <picture>
+                            <!-- Portrait image for mobile screens -->
+                            <source media="(max-width: 768px)" srcset="Images/mandapam_mobile.jpg">
+                            <!-- Landscape image for desktop (default) -->
+                            <img src="Images/mandapam_desktop.jpg" alt="The Mandapam">
+                        </picture>
+                    </div>
+                </div>
+                
+                <!-- Right: The Editorial Details -->
+                <div class="wd-split-content">
+                    <h2 class="wd-editorial-title">THE<br><span class="italic-serif">Wedding Day</span></h2>
+                    
+                    <div class="wd-info-block">
+                        <div class="wd-line"></div>
+                        <div class="wd-info-row">
+                            <span class="wd-info-label">DATE</span>
+                            <span class="wd-info-value">NOV 19, 2026</span>
+                        </div>
+                        
+                        <div class="wd-line"></div>
+                        <div class="wd-info-row">
+                            <span class="wd-info-label">TIME</span>
+                            <span class="wd-info-value">5:00 PM</span>
+                        </div>
+                        
+                        <div class="wd-line"></div>
+                        <div class="wd-info-row">
+                            <span class="wd-info-label">VENUE</span>
+                            <span class="wd-info-value">THE GRAND PALACE</span>
+                        </div>
+                        <div class="wd-line"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Location & Route Section -->
+            <section id="location-section">
+                <div class="location-card-container">
+                    <div class="location-card">
+                        
+                        <!-- Left Side: The Map as the "Image" -->
+                        <div class="event-image-side">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14513.791557022204!2d73.67499696328328!3d24.573934571732977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3967e5606d2c4e13%3A0xc3b83c5df53eb268!2sCity%20Palace%2C%20Udaipur!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                                class="map-iframe" 
+                                allowfullscreen="" 
+                                loading="lazy" 
+                                referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                            <div class="map-overlay"></div>
+                        </div>
+
+                        <!-- Right Side: The Venue & Logistics Info -->
+                        <div class="event-info-side">
+                            <span class="event-tag">THE VENUE</span>
+                            <h3 class="event-title">THE GRAND PALACE</h3>
+                            <p class="event-desc">1 Palace Road, Pichola<br>Udaipur, Rajasthan 313001</p>
+                            
+                            <!-- Condensed Logistics matching the text style -->
+                            <div class="location-logistics">
+                                <div class="logistics-item">
+                                    <span class="logistics-label">AIRPORT</span>
+                                    <p class="logistics-value">Maharana Pratap (24 km drive)</p>
+                                </div>
+                                <div class="logistics-item">
+                                    <span class="logistics-label">RAILWAY</span>
+                                    <p class="logistics-value">Udaipur City Station (3 km drive)</p>
+                                </div>
+                            </div>
+
+                            <a href="https://maps.google.com" target="_blank" class="btn-event">Get Directions</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
+
+    <!-- Grand Finale Footer (Curtain Reveal) -->
+    <!-- Positioned outside the Lenis scroll wrapper so it stays stationary behind the scrolling canvas! -->
+    <section id="finale-footer">
+        <div class="finale-content">
+            <div class="bg-monogram">A&A</div>
+            <div class="finale-text-wrapper">
+                <h2 class="finale-quote">With love & anticipation,</h2>
+                <h1 class="finale-names">Ananya & Ajay</h1>
+            </div>
+            <a href="#rsvp" class="btn-finale-rsvp">RSVP NOW</a>
+            <div class="finale-copyright">© 2026 Ananya & Ajay. All rights reserved.</div>
+        </div>
+    </section>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
